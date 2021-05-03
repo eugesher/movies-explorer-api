@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/eugesher/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/eugesher/movies-explorer-api#readme"
+  "homepage": "https://github.com/eugesher/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
 }
