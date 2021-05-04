@@ -4,38 +4,38 @@ const validator = require('validator');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, "Поле 'страна' не может быть пустым"],
+    required: true,
   },
   director: {
     type: String,
-    required: [true, "Поле 'режиссёр' не может быть пустым"],
+    required: true,
   },
   duration: {
     type: Number,
-    required: [true, "Поле 'длительность' не может быть пустым"],
+    required: true,
   },
   year: {
     type: String,
-    required: [true, "Поле 'год выпуска' не может быть пустым"],
+    required: true,
   },
   description: {
     type: String,
-    required: [true, "Поле 'описание' не может быть пустым"],
+    required: true,
   },
   image: {
     type: String,
-    required: [true, "Поле 'ссылка на постер' не может быть пустым"],
-    validate: [validator.isURL, "Поле 'ссылка на постер' содержит недопустимое значение"],
+    required: true,
+    validate: validator.isURL,
   },
   trailer: {
     type: String,
-    required: [true, "Поле 'ссылка на трейлер' не может быть пустым"],
-    validate: [validator.isURL, "Поле 'ссылка на трейлер' содержит недопустимое значение"],
+    required: true,
+    validate: validator.isURL,
   },
   thumbnail: {
     type: String,
-    required: [true, "Поле 'ссылка на превью' не может быть пустым"],
-    validate: [validator.isURL, "Поле 'ссылка на превью' содержит недопустимое значение"],
+    required: true,
+    validate: validator.isURL,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
