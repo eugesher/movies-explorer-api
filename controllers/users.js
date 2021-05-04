@@ -12,7 +12,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователя не существует');
-      else res.send(user); // todo: send { email, name }
+      else res.send({ email: user.email, name: user.name });
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') next(new BadRequestError('Недопустимый идентификатор пользователя'));
@@ -26,7 +26,7 @@ module.exports.updateUserInfo = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователя не существует');
-      else res.send(user);
+      else res.send({ email: user.email, name: user.name });
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') next(new BadRequestError('Недопустимый идентификатор пользователя'));
