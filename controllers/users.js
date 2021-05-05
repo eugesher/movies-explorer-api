@@ -6,20 +6,20 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const ConflictError = require('../errors/conflict-error');
-const { concatenateErrors } = require('../utils');
+const { concatenateErrors, errorMessages } = require('../utils');
 
 module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователя не существует');
+        throw new NotFoundError(errorMessages.userNotFound);
       } else {
         res.send({ email: user.email, name: user.name });
       }
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') {
-        next(new BadRequestError('Недопустимый идентификатор пользователя'));
+        next(new BadRequestError(errorMessages.invalidUserId));
       } else {
         next(err);
       }
@@ -32,14 +32,14 @@ module.exports.updateUserInfo = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователя не существует');
+        throw new NotFoundError(errorMessages.userNotFound);
       } else {
         res.send({ email: user.email, name: user.name });
       }
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') {
-        next(new BadRequestError('Недопустимый идентификатор пользователя'));
+        next(new BadRequestError(errorMessages.invalidUserId));
       } else if (err.name === 'ValidationError') {
         next(new BadRequestError(concatenateErrors(err)));
       } else {
@@ -72,7 +72,7 @@ module.exports.createUser = (req, res, next) => {
 
   return new Promise(() => {
     if (!email || !password || !name) {
-      throw new BadRequestError('Не заполнены обязательные поля');
+      throw new BadRequestError(errorMessages.missingRequiredFields);
     }
     bcrypt
       .hash(password, 8)
@@ -88,7 +88,7 @@ module.exports.createUser = (req, res, next) => {
       })
       .catch((err) => {
         if (err.code === 11000) {
-          next(new ConflictError('Пользователь с таким email уже существует.'));
+          next(new ConflictError(errorMessages.emailAlreadyExists));
         } else if (err.name === 'ValidationError') {
           next(new BadRequestError(concatenateErrors(err)));
         } else {

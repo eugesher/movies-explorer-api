@@ -10,6 +10,10 @@ module.exports.errorMessages = {
   movieNotFound: 'Фильм не найден',
   deleteOnlyOwnMovie: 'Можно удалять только свои фильмы',
   invalidMovieId: 'Недопустимый идентификатор фильма',
+  userNotFound: 'Пользователь не найден',
+  invalidUserId: 'Недопустимый идентификатор пользователя',
+  missingRequiredFields: 'Не заполнены обязательные поля',
+  emailAlreadyExists: 'Пользователь с таким email уже существует',
 };
 
 module.exports.fieldNames = {
