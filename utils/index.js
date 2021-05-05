@@ -7,6 +7,9 @@ module.exports.errorMessages = {
   tooLong: (fieldName, length) => `Поле '${fieldName}' должно содержать не более ${length} символов`,
   wrongUserCredentials: 'Неправильные почта или пароль',
   unauthorized: 'Необходима авторизация',
+  movieNotFound: 'Фильм не найден',
+  deleteOnlyOwnMovie: 'Можно удалять только свои фильмы',
+  invalidMovieId: 'Недопустимый идентификатор фильма',
 };
 
 module.exports.fieldNames = {

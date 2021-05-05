@@ -3,7 +3,7 @@ const Movie = require('../models/movie');
 const BadRequestError = require('../errors/bad-request-error');
 const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
-const { concatenateErrors } = require('../utils');
+const { concatenateErrors, errorMessages } = require('../utils');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
@@ -41,9 +41,9 @@ module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(movieId)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Фильма не существует');
+        throw new NotFoundError(errorMessages.movieNotFound);
       } else if (!movie.owner.equals(req.user._id)) {
-        throw new ForbiddenError('Можно удалять только свои фильмы');
+        throw new ForbiddenError(errorMessages.deleteOnlyOwnMovie);
       } else {
         Movie.findByIdAndRemove(movieId).then((removedMovie) => {
           res.send(removedMovie);
@@ -52,7 +52,7 @@ module.exports.deleteMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') {
-        next(new BadRequestError('Недопустимый идентификатор фильма'));
+        next(new BadRequestError(errorMessages.invalidMovieId));
       } else {
         next(err);
       }
