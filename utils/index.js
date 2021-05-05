@@ -15,6 +15,7 @@ module.exports.errorMessages = {
   missingRequiredFields: 'Не заполнены обязательные поля',
   emailAlreadyExists: 'Пользователь с таким email уже существует',
   notFound: 'Запрашиваемый ресурс не найден',
+  tooManyRequests: 'Слишком много запросов, попробуйте позже',
 };
 
 module.exports.fieldNames = {
