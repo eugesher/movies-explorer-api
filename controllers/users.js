@@ -71,7 +71,7 @@ module.exports.createUser = (req, res, next) => {
   const { email, password, name } = req.body;
 
   return new Promise(() => {
-    if (!email || !password) {
+    if (!email || !password || !name) {
       throw new BadRequestError('Не заполнены обязательные поля');
     }
     bcrypt
