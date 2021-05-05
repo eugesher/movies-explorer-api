@@ -23,6 +23,18 @@ module.exports.validateRequestHeaders = celebrate({
     .unknown(true),
 });
 
+module.exports.validateUpdateUserInfoRequest = celebrate({
+  headers: Joi.object()
+    .keys({
+      authorization: Joi.string().required(),
+    })
+    .unknown(true),
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    name: Joi.string().required().min(2).max(30),
+  }),
+});
+
 module.exports.validateCreateMovieRequest = celebrate({
   headers: Joi.object()
     .keys({
