@@ -11,6 +11,7 @@ const router = require('./routes');
 const NotFoundError = require('./errors/not-found-error');
 const errorHandler = require('./errors/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { errorMessages } = require('./utils');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -39,7 +40,7 @@ app.use(errorLogger);
 // noinspection JSCheckFunctionSignatures
 app.use(errors());
 app.use((req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+  next(new NotFoundError(errorMessages.notFound));
 });
 app.use(errorHandler);
 

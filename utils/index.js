@@ -14,6 +14,7 @@ module.exports.errorMessages = {
   invalidUserId: 'Недопустимый идентификатор пользователя',
   missingRequiredFields: 'Не заполнены обязательные поля',
   emailAlreadyExists: 'Пользователь с таким email уже существует',
+  notFound: 'Запрашиваемый ресурс не найден',
 };
 
 module.exports.fieldNames = {
