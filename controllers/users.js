@@ -11,12 +11,18 @@ const { concatenateErrors } = require('../utils');
 module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
-      if (!user) throw new NotFoundError('Пользователя не существует');
-      else res.send({ email: user.email, name: user.name });
+      if (!user) {
+        throw new NotFoundError('Пользователя не существует');
+      } else {
+        res.send({ email: user.email, name: user.name });
+      }
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId') next(new BadRequestError('Недопустимый идентификатор пользователя'));
-      else next(err);
+      if (err.kind === 'ObjectId') {
+        next(new BadRequestError('Недопустимый идентификатор пользователя'));
+      } else {
+        next(err);
+      }
     });
 };
 
@@ -25,13 +31,20 @@ module.exports.updateUserInfo = (req, res, next) => {
 
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
-      if (!user) throw new NotFoundError('Пользователя не существует');
-      else res.send({ email: user.email, name: user.name });
+      if (!user) {
+        throw new NotFoundError('Пользователя не существует');
+      } else {
+        res.send({ email: user.email, name: user.name });
+      }
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId') next(new BadRequestError('Недопустимый идентификатор пользователя'));
-      else if (err.name === 'ValidationError') next(new BadRequestError(concatenateErrors(err)));
-      else next(err);
+      if (err.kind === 'ObjectId') {
+        next(new BadRequestError('Недопустимый идентификатор пользователя'));
+      } else if (err.name === 'ValidationError') {
+        next(new BadRequestError(concatenateErrors(err)));
+      } else {
+        next(err);
+      }
     });
 };
 
@@ -41,9 +54,11 @@ module.exports.login = (req, res, next) => {
   // noinspection JSUnresolvedFunction
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-key', {
-        expiresIn: '7d',
-      });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-key',
+        { expiresIn: '7d' },
+      );
       res.send({ token });
     })
     .catch((err) => {
@@ -53,12 +68,12 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const {
-    email, password, name,
-  } = req.body;
+  const { email, password, name } = req.body;
 
   return new Promise(() => {
-    if (!email || !password) throw new BadRequestError('Не заполнены обязательные поля');
+    if (!email || !password) {
+      throw new BadRequestError('Не заполнены обязательные поля');
+    }
     bcrypt
       .hash(password, 8)
       .then((hash) => User.create({
@@ -72,9 +87,13 @@ module.exports.createUser = (req, res, next) => {
         res.send(u);
       })
       .catch((err) => {
-        if (err.code === 11000) next(new ConflictError('Пользователь с таким email уже существует.'));
-        else if (err.name === 'ValidationError') next(new BadRequestError(concatenateErrors(err)));
-        else next(err);
+        if (err.code === 11000) {
+          next(new ConflictError('Пользователь с таким email уже существует.'));
+        } else if (err.name === 'ValidationError') {
+          next(new BadRequestError(concatenateErrors(err)));
+        } else {
+          next(err);
+        }
       });
   }).catch(next);
 };
