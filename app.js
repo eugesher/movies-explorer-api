@@ -1,5 +1,3 @@
-// noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
-
 require('dotenv').config();
 
 const express = require('express');

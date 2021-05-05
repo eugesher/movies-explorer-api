@@ -1,5 +1,3 @@
-// noinspection JSCheckFunctionSignatures
-
 const router = require('express').Router();
 
 const {
