@@ -6,6 +6,7 @@ module.exports.errorMessages = {
   tooShort: (fieldName, length) => `Поле '${fieldName}' должно содержать не менее ${length} символов`,
   tooLong: (fieldName, length) => `Поле '${fieldName}' должно содержать не более ${length} символов`,
   wrongUserCredentials: 'Неправильные почта или пароль',
+  unauthorized: 'Необходима авторизация',
 };
 
 module.exports.fieldNames = {
