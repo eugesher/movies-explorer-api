@@ -42,6 +42,8 @@ module.exports.updateUserInfo = (req, res, next) => {
         next(new BadRequestError(errorMessages.invalidUserId));
       } else if (err.name === 'ValidationError') {
         next(new BadRequestError(concatenateErrors(err)));
+      } else if (err.code === 11000) {
+        next(new ConflictError(errorMessages.emailAlreadyExists));
       } else {
         next(err);
       }
