@@ -66,9 +66,9 @@ module.exports.validateCreateMovieRequest = celebrate({
       .messages(requestValidationErrorMessages.description),
     image: Joi.string().required()
       .messages(requestValidationErrorMessages.image),
-    trailer: Joi.string().required().uri()
+    trailer: Joi.string().required()
       .messages(requestValidationErrorMessages.trailer),
-    thumbnail: Joi.string().required().uri()
+    thumbnail: Joi.string().required()
       .messages(requestValidationErrorMessages.thumbnail),
     movieId: Joi.number().required()
       .messages(requestValidationErrorMessages.beatFilmMovieId),
