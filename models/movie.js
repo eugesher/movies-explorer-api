@@ -27,7 +27,6 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: [true, errorMessages.empty(fieldNames.image)],
-    validate: [validator.isURL, errorMessages.invalid(fieldNames.image)],
   },
   trailer: {
     type: String,
@@ -37,7 +36,6 @@ const movieSchema = new mongoose.Schema({
   thumbnail: {
     type: String,
     required: [true, errorMessages.empty(fieldNames.thumbnail)],
-    validate: [validator.isURL, errorMessages.invalid(fieldNames.thumbnail)],
   },
   movieId: {
     type: Number,
