@@ -29,10 +29,10 @@ const movieSchema = new mongoose.Schema({
     required: [true, errorMessages.empty(fieldNames.image)],
     validate: [validator.isURL, errorMessages.invalid(fieldNames.image)],
   },
-  trailerLink: {
+  trailer: {
     type: String,
-    required: [true, errorMessages.empty(fieldNames.trailerLink)],
-    validate: [validator.isURL, errorMessages.invalid(fieldNames.trailerLink)],
+    required: [true, errorMessages.empty(fieldNames.trailer)],
+    validate: [validator.isURL, errorMessages.invalid(fieldNames.trailer)],
   },
   thumbnail: {
     type: String,

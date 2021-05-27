@@ -19,7 +19,7 @@ module.exports.createMovie = (req, res, next) => {
     year: req.body.year,
     description: req.body.description,
     image: req.body.image,
-    trailerLink: req.body.trailerLink,
+    trailer: req.body.trailer,
     thumbnail: req.body.thumbnail,
     movieId: req.body.movieId,
     nameRU: req.body.nameRU,

@@ -28,7 +28,7 @@ const fieldNames = {
   year: 'год выпуска',
   description: 'описание',
   image: 'ссылка на постер',
-  trailerLink: 'ссылка на трейлер',
+  trailer: 'ссылка на трейлер',
   thumbnail: 'ссылка на превью',
   movieId: 'идентификатор фильма',
   nameRU: 'название (ru)',
@@ -88,11 +88,11 @@ const requestValidationErrorMessages = {
     'string.uri': errorMessages.invalid(fieldNames.image),
     'string.base': errorMessages.invalid(fieldNames.image),
   },
-  trailerLink: {
-    'any.required': errorMessages.empty(fieldNames.trailerLink),
-    'string.empty': errorMessages.empty(fieldNames.trailerLink),
-    'string.uri': errorMessages.invalid(fieldNames.trailerLink),
-    'string.base': errorMessages.invalid(fieldNames.trailerLink),
+  trailer: {
+    'any.required': errorMessages.empty(fieldNames.trailer),
+    'string.empty': errorMessages.empty(fieldNames.trailer),
+    'string.uri': errorMessages.invalid(fieldNames.trailer),
+    'string.base': errorMessages.invalid(fieldNames.trailer),
   },
   thumbnail: {
     'any.required': errorMessages.empty(fieldNames.thumbnail),
